@@ -17,4 +17,5 @@ public:
 	~ExampleClass() override = default;
 
 	void print_type(const Variant &p_variant) const;
+	void print_test();
 };

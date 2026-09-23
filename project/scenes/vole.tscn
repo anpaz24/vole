@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://polaxjpy6sbw"]
+
+[ext_resource type="PackedScene" uid="uid://ba8x5wg6xfkj" path="res://scenes/main_memory.tscn" id="1_6b000"]
+
+[node name="VOLE" type="CenterContainer" unique_id=228026787]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+
+[node name="MainMemory" parent="." unique_id=854064319 instance=ExtResource("1_6b000")]
+layout_mode = 2

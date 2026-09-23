@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ba8x5wg6xfkj"]
+
+[ext_resource type="Script" uid="uid://bqq0mi2utsrdu" path="res://scripts/main_memory.gd" id="1_igyro"]
+
+[node name="MainMemory" type="VBoxContainer" unique_id=854064319]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_igyro")
+
+[node name="Label" type="Label" parent="." unique_id=40958256]
+layout_mode = 2
+text = "Main Memory"
+horizontal_alignment = 1
+
+[node name="ColumnGrid" type="GridContainer" parent="." unique_id=1787947058]
+layout_mode = 2
+columns = 17
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1946372551]
+layout_mode = 2
+
+[node name="RowGrid" type="GridContainer" parent="HBoxContainer" unique_id=782380771]
+layout_mode = 2
+
+[node name="BodyGrid" type="GridContainer" parent="HBoxContainer" unique_id=1945755761]
+layout_mode = 2
+columns = 16
