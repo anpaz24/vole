@@ -24,6 +24,11 @@ func _correct(new_text := text) -> void:
 	if new_text.length() == 1: text = "0" + new_text
 
 func setup(input_text := "") -> void:
+	if input_text == " ": # gap
+		modulate = Color(0,0,0,0)
+	elif input_text == "0000": # IR
+		max_length = 4
+	
 	text = input_text
 	if not input_text:
 		editable = true

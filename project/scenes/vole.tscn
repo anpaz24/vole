@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://polaxjpy6sbw"]
 
-[ext_resource type="PackedScene" uid="uid://ba8x5wg6xfkj" path="res://scenes/main_memory.tscn" id="1_6b000"]
+[ext_resource type="PackedScene" uid="uid://ba8x5wg6xfkj" path="res://scenes/table.tscn" id="1_6b000"]
+[ext_resource type="Script" uid="uid://b3egckyxqw8u5" path="res://scripts/vole.gd" id="1_q8wen"]
 
 [node name="VOLE" type="CenterContainer" unique_id=228026787]
 anchors_preset = 15
@@ -9,6 +10,53 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 1
+script = ExtResource("1_q8wen")
 
-[node name="MainMemory" parent="." unique_id=854064319 instance=ExtResource("1_6b000")]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1254232049]
 layout_mode = 2
+
+[node name="MainMemory" parent="HBoxContainer" unique_id=854064319 instance=ExtResource("1_6b000")]
+layout_mode = 2
+
+[node name="Margin1" type="MarginContainer" parent="HBoxContainer" unique_id=1551709034]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="GeneralRegisters" parent="HBoxContainer" unique_id=516595452 instance=ExtResource("1_6b000")]
+layout_mode = 2
+type = "General Purpose Registers"
+width = 1
+
+[node name="Margin2" type="MarginContainer" parent="HBoxContainer" unique_id=30258589]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1992601870]
+layout_mode = 2
+
+[node name="SystemRegisters" parent="HBoxContainer/VBoxContainer" unique_id=117153601 instance=ExtResource("1_6b000")]
+layout_mode = 2
+type = "System Registers"
+height = 2
+width = 1
+
+[node name="Margin1" type="MarginContainer" parent="HBoxContainer/VBoxContainer" unique_id=899506869]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="RunButton" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=95151107]
+layout_mode = 2
+text = "Run"
+
+[node name="StepButton" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1023284295]
+layout_mode = 2
+text = "Step"

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bmnse0mxxg3xr"]
 
-[ext_resource type="Script" uid="uid://c1yr35brt8blc" path="res://scripts/memory_line_edit.gd" id="1_nv3do"]
+[ext_resource type="Script" uid="uid://c1yr35brt8blc" path="res://scripts/table_line_edit.gd" id="1_t7ecu"]
 
-[node name="MemoryLineEdit" type="LineEdit" unique_id=1637611425]
+[node name="TableLineEdit" type="LineEdit" unique_id=1637611425]
 offset_right = 38.25
 offset_bottom = 31.0
 focus_mode = 0
@@ -19,4 +19,4 @@ selecting_enabled = false
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
 virtual_keyboard_type = 2
-script = ExtResource("1_nv3do")
+script = ExtResource("1_t7ecu")
