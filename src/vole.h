@@ -9,9 +9,9 @@ using namespace godot;
 class Vole : public RefCounted {
 	GDCLASS(Vole, RefCounted)
 
-/* private:
-    MainMemory main_memory = MainMemory();
-    CPU cpu = CPU(); */
+private:
+	MainMemory main_memory;
+	CPU cpu;
 
 protected:
 	static void _bind_methods();
