@@ -5,7 +5,9 @@
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
 
-#include "example_class.h"
+#include "main_memory.h"
+#include "cpu.h"
+#include "vole.h"
 
 using namespace godot;
 
@@ -14,7 +16,10 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
-	GDREGISTER_CLASS(ExampleClass);
+	GDREGISTER_CLASS(MainMemory);
+	GDREGISTER_CLASS(Registers);
+	GDREGISTER_CLASS(CPU);
+	GDREGISTER_CLASS(Vole);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
