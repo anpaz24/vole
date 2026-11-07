@@ -1,49 +1,50 @@
-extends VBoxContainer
+class_name Table extends VBoxContainer
 
 
 const LINE_SCENE = preload("res://scenes/table_line_edit.tscn")
 @onready var columns = $ColumnGrid
 @onready var rows = $HBoxContainer/RowGrid
 @onready var body = $HBoxContainer/BodyGrid
+var height
+var width
+var cells = []
+var dirty = false # no functionality now, to be added
 
-@export_enum("Main Memory", "General Purpose Registers", "System Registers") var type := "Main Memory"
-@export var height := 16
-@export var width := 16
 
-func _ready() -> void: # populates table
+func _ready() -> void:
 	#$Label.text = type
+	_set_dimensions()
 	_create_table()
+	#print_cells()
+
+func _set_dimensions():
+	height = 16
+	width = 16
 
 func _create_table():
 	# sets height and width of grids
 	body.columns = width
 	columns.columns = width + 1
 	
-	# populates table
 	_add_line_edit(columns, " ") # corner gap
-	for i in range(width): # column header and body
-		_add_line_edit(columns, _get_coltxt_gen(type).call(i))
-		for j in range(height):
-			_add_line_edit(body, "0000" if type == "System Registers" and j == 1 else "") # IR
-	for i in range(height): # row header
-		_add_line_edit(rows, _get_rowtxt_gen(type).call(i))
+	for col in range(width):
+		_add_line_edit(columns, _gen_coltxt(col)) # column header
+		
+	for row in range(height):
+		_add_line_edit(rows, _gen_rowtxt(row)) # row header
+		
+		for col in range(width):
+			# creates cell, connects changed signal and appends to cells list
+			var address = row * width + col
+			var cell = _add_line_edit(body, "")
+			cell.value_changed.connect(_on_cell_value_changed.bind(address))
+			cells.append(cell)
 
-func _get_coltxt_gen(table_type: String):
-	match table_type:
-		"Main Memory":
-			return func(i): return "_" + _get_hex(i)
-		_:
-			return func(_i): return " "
-func _get_rowtxt_gen(table_type: String):
-	match table_type:
-		"Main Memory":
-			return  func(i): return _get_hex(i) + "_"
-		"General Purpose Registers":
-			return func(i): return "R" + _get_hex(i)
-		"System Registers":
-			return func(i): return "PC" if i == 0 else "IR"
-		_:
-			return func(_i): return " "
+func _gen_coltxt(i):
+	return " "
+
+func _gen_rowtxt(i):
+	return " "
 
 func _get_hex(n):
 	return ("%02X" % n)[1]
@@ -52,3 +53,24 @@ func _add_line_edit(grid, text := ""): # adds cell to grid
 	var line_instance = LINE_SCENE.instantiate()
 	line_instance.setup(text)
 	grid.add_child(line_instance)
+	return line_instance
+
+func _on_cell_value_changed(value: String, address: int) -> void:
+	dirty = true
+
+func get_values() -> PackedStringArray:
+	var array: PackedStringArray
+	for i in cells:
+		array.append(i.text if i.text != "" else i.placeholder_text)
+	return array
+	
+func print_cells():
+	print(len(cells))
+	var array: PackedStringArray
+	for i in cells:
+		array.append(i.text if i.text != "" else i.placeholder_text)
+	print(array)
+
+func set_values(values: PackedStringArray) -> void:
+	for i in range(cells.size()):
+		cells[i].text = values[i] if values[i] != "00" else ""
