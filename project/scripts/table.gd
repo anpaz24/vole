@@ -22,6 +22,7 @@ func _set_dimensions():
 	width = 16
 
 func _create_table():
+	cells.clear()
 	# sets height and width of grids
 	body.columns = width
 	columns.columns = width + 1
