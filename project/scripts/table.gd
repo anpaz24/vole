@@ -8,7 +8,6 @@ const LINE_SCENE = preload("res://scenes/table_line_edit.tscn")
 var height
 var width
 var cells = []
-var dirty = false # no functionality now, to be added
 
 
 func _ready() -> void:
@@ -56,7 +55,7 @@ func _add_line_edit(grid, text := ""): # adds cell to grid
 	return line_instance
 
 func _on_cell_value_changed(value: String, address: int) -> void:
-	dirty = true
+	cells[address+1 if !(address >= len(cells)-1) else 0].grab_focus() # jumps to next cell
 
 func get_values() -> PackedStringArray:
 	var array: PackedStringArray
