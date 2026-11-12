@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://polaxjpy6sbw"]
+[gd_scene format=3 uid="uid://c6y5q8r0v5x1m"]
 
 [ext_resource type="Script" uid="uid://bn26ulj3fv1ew" path="res://scripts/control.gd" id="1_1m5vm"]
 [ext_resource type="PackedScene" uid="uid://ba8x5wg6xfkj" path="res://scenes/table.tscn" id="1_6b000"]
@@ -164,6 +164,7 @@ Regs."
 
 [node name="SysRegsContainer" type="HBoxContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2" unique_id=214634945]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="SystemRegisters" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2/SysRegsContainer" unique_id=117153601 instance=ExtResource("1_6b000")]
 layout_mode = 2

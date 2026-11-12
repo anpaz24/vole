@@ -21,9 +21,16 @@ func _set_dimensions():
 	width = 16
 
 func _create_table():
+	cells.clear()
 	# sets height and width of grids
 	body.columns = width
 	columns.columns = width + 1
+	
+	# small spacing between cells so the grid looks cleaner
+	body.add_theme_constant_override("h_separation", 2)
+	body.add_theme_constant_override("v_separation", 2)
+	columns.add_theme_constant_override("h_separation", 2)
+	rows.add_theme_constant_override("v_separation", 2)
 	
 	_add_line_edit(columns, " ") # corner gap
 	for col in range(width):
