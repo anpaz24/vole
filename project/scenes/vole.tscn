@@ -1,156 +1,264 @@
 [gd_scene format=3 uid="uid://c6y5q8r0v5x1m"]
 
-[ext_resource type="Script" uid="uid://b3egckyxqw8u5" path="res://scripts/vole.gd" id="1_vole"]
-[ext_resource type="PackedScene" uid="uid://ba8x5wg6xfkj" path="res://scenes/table.tscn" id="2_table"]
+[ext_resource type="Script" uid="uid://bn26ulj3fv1ew" path="res://scripts/control.gd" id="1_1m5vm"]
+[ext_resource type="PackedScene" uid="uid://ba8x5wg6xfkj" path="res://scenes/table.tscn" id="1_6b000"]
+[ext_resource type="Script" uid="uid://b3egckyxqw8u5" path="res://scripts/vole.gd" id="1_q8wen"]
+[ext_resource type="StyleBox" uid="uid://bwtl3jqqa7sg8" path="res://themes/container_style_box_flat.tres" id="2_g5gdw"]
+[ext_resource type="Script" uid="uid://b165gv57vee2e" path="res://scripts/main_memory.gd" id="3_cdylg"]
+[ext_resource type="Script" uid="uid://dtg45s0p0f366" path="res://scripts/gen_registers.gd" id="4_g5gdw"]
+[ext_resource type="Script" uid="uid://bhpec1xr6pu2r" path="res://scripts/sys_registers.gd" id="5_1m5vm"]
+[ext_resource type="Script" uid="uid://3eocryc72ecc" path="res://scripts/scroll.gd" id="8_v4tv4"]
 
-[node name="VOLE" type="MarginContainer" unique_id=1335988477]
+[sub_resource type="Gradient" id="Gradient_fu2r2"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a0cl0"]
+gradient = SubResource("Gradient_fu2r2")
+fill_to = Vector2(0, 0.125)
+repeat = 1
+
+[node name="VOLE" type="HSplitContainer" unique_id=1448860849]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vole")
+focus_mode = 1
 
-[node name="Background" type="ColorRect" parent="." unique_id=1125785942]
-custom_minimum_size = Vector2(1152, 648)
-layout_mode = 2
-color = Color(0.09, 0.11, 0.16, 1)
-
-[node name="MainVBox" type="VBoxContainer" parent="." unique_id=94803734]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="TopBar" type="HBoxContainer" parent="MainVBox" unique_id=334016233]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="TitleLabel" type="Label" parent="MainVBox/TopBar" unique_id=477927639]
-layout_mode = 2
-theme_override_font_sizes/font_size = 18
-text = "VOLEdu Simulator"
-
-[node name="TaskLabel" type="Label" parent="MainVBox/TopBar" unique_id=2070994048]
+[node name="MachineControl" type="Control" parent="." unique_id=112556402]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.75, 0.85, 0.98, 1)
-text = "Sandbox mode: write instructions or load the example program."
+script = ExtResource("1_1m5vm")
 
-[node name="TaskOption" type="OptionButton" parent="MainVBox/TopBar" unique_id=1420172786]
+[node name="TutorialOverlay" type="ColorRect" parent="MachineControl" unique_id=289001839]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5137255)
+
+[node name="Machine" type="HBoxContainer" parent="MachineControl" unique_id=642678414]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.5
+offset_top = -57.5
+offset_right = 224.5
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("1_q8wen")
+
+[node name="Vole" type="Vole" parent="MachineControl/Machine" unique_id=284375462]
+
+[node name="MemoryContainer" type="PanelContainer" parent="MachineControl/Machine" unique_id=451951172]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_g5gdw")
+
+[node name="LabelContainer" type="MarginContainer" parent="MachineControl/Machine/MemoryContainer" unique_id=1329511180]
+layout_mode = 2
+theme_override_constants/margin_top = -28
+
+[node name="Label" type="Label" parent="MachineControl/Machine/MemoryContainer/LabelContainer" unique_id=1673809069]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Main memory"
+
+[node name="TabContainer" type="TabContainer" parent="MachineControl/Machine/MemoryContainer" unique_id=1245331623]
+layout_mode = 2
+current_tab = 0
+tab_0/title = "Registers"
+
+[node name="MainMemory" parent="MachineControl/Machine/MemoryContainer/TabContainer" unique_id=854064319 instance=ExtResource("1_6b000")]
+layout_mode = 2
+script = ExtResource("3_cdylg")
+metadata/_tab_index = 0
+metadata/_tab_name = "Registers"
+
+[node name="Assembler" type="Label" parent="MachineControl/Machine/MemoryContainer/TabContainer" unique_id=1864212348]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="BusContainer" type="CenterContainer" parent="MachineControl/Machine" unique_id=1019365394]
 layout_mode = 2
 
-[node name="StatusBox" type="VBoxContainer" parent="MainVBox" unique_id=1298168584]
+[node name="TextureRect" type="TextureRect" parent="MachineControl/Machine/BusContainer" unique_id=1414058049]
 layout_mode = 2
-offset_transform_position_ratio = Vector2(0.1, 0)
-theme_override_constants/separation = 4
+texture = SubResource("GradientTexture2D_a0cl0")
 
-[node name="StatusLabel" type="Label" parent="MainVBox/StatusBox" unique_id=627454626]
+[node name="Label" type="Label" parent="MachineControl/Machine/BusContainer/TextureRect" unique_id=533262805]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+text = "Bus"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CPUContainer" type="PanelContainer" parent="MachineControl/Machine" unique_id=771474226]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.35, 0.78, 0.98, 1)
-text = "Status: Ready"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = ExtResource("2_g5gdw")
 
-[node name="DecodedLabel" type="Label" parent="MainVBox/StatusBox" unique_id=950958810]
+[node name="LabelContainer" type="MarginContainer" parent="MachineControl/Machine/CPUContainer" unique_id=2027971365]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.85, 0.45, 1)
-text = "Decoded instruction: waiting"
+theme_override_constants/margin_top = -28
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainVBox" unique_id=986044975]
+[node name="Label" type="Label" parent="MachineControl/Machine/CPUContainer/LabelContainer" unique_id=1888521250]
 layout_mode = 2
-theme_override_constants/separation = 16
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "CPU"
 
-[node name="MainMemory" parent="MainVBox/HBoxContainer" unique_id=1929818616 instance=ExtResource("2_table")]
-layout_mode = 2
-
-[node name="Margin1" type="MarginContainer" parent="MainVBox/HBoxContainer" unique_id=983439045]
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="GeneralRegisters" parent="MainVBox/HBoxContainer" unique_id=1104045288 instance=ExtResource("2_table")]
-layout_mode = 2
-type = "General Purpose Registers"
-width = 1
-
-[node name="Margin2" type="MarginContainer" parent="MainVBox/HBoxContainer" unique_id=1906178643]
-custom_minimum_size = Vector2(10, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="MachineControl/Machine/CPUContainer" unique_id=520709512]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainVBox/HBoxContainer" unique_id=15760589]
+[node name="Col1" type="VBoxContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer" unique_id=533822688]
+layout_mode = 2
+
+[node name="LabelContainer" type="MarginContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col1" unique_id=947201748]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col1/LabelContainer" unique_id=1051903258]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Gen.
+Regs."
+
+[node name="GeneralRegisters" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col1" unique_id=516595452 instance=ExtResource("1_6b000")]
+layout_mode = 2
+script = ExtResource("4_g5gdw")
+
+[node name="Col2" type="VBoxContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer" unique_id=2133787413]
+layout_mode = 2
+
+[node name="LabelContainer" type="MarginContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2" unique_id=246895166]
+layout_mode = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2/LabelContainer" unique_id=377666110]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "System
+Regs."
+
+[node name="SysRegsContainer" type="HBoxContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2" unique_id=214634945]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="SystemRegisters" parent="MainVBox/HBoxContainer/VBoxContainer" unique_id=917646840 instance=ExtResource("2_table")]
+[node name="SystemRegisters" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2/SysRegsContainer" unique_id=117153601 instance=ExtResource("1_6b000")]
 layout_mode = 2
-type = "System Registers"
-height = 2
-width = 1
+script = ExtResource("5_1m5vm")
 
-[node name="Margin1" type="MarginContainer" parent="MainVBox/HBoxContainer/VBoxContainer" unique_id=1572048845]
-custom_minimum_size = Vector2(0, 8)
+[node name="ZeroButton" type="Button" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2/SysRegsContainer" unique_id=275200276]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "= 0"
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2" unique_id=1992601870]
 layout_mode = 2
 
-[node name="ControlsGrid" type="GridContainer" parent="MainVBox/HBoxContainer/VBoxContainer" unique_id=1643467169]
-layout_mode = 2
-theme_override_constants/h_separation = 6
-theme_override_constants/v_separation = 6
-columns = 2
-
-[node name="RunButton" type="Button" parent="MainVBox/HBoxContainer/VBoxContainer/ControlsGrid" unique_id=6446892]
-custom_minimum_size = Vector2(90, 32)
+[node name="RunButton" type="Button" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2/ButtonsContainer" unique_id=95151107]
 layout_mode = 2
 text = "Run"
 
-[node name="StepButton" type="Button" parent="MainVBox/HBoxContainer/VBoxContainer/ControlsGrid" unique_id=1108393]
-custom_minimum_size = Vector2(90, 32)
+[node name="StepButton" type="Button" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2/ButtonsContainer" unique_id=1023284295]
 layout_mode = 2
 text = "Step"
 
-[node name="PauseButton" type="Button" parent="MainVBox/HBoxContainer/VBoxContainer/ControlsGrid" unique_id=1416615794]
-custom_minimum_size = Vector2(90, 32)
+[node name="ClearButton" type="Button" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col2/ButtonsContainer" unique_id=2085195814]
 layout_mode = 2
-text = "Pause"
+text = "Clear"
 
-[node name="ResetButton" type="Button" parent="MainVBox/HBoxContainer/VBoxContainer/ControlsGrid" unique_id=1746536924]
-custom_minimum_size = Vector2(90, 32)
+[node name="Col3" type="VBoxContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer" unique_id=111398732]
 layout_mode = 2
-text = "Reset"
+alignment = 1
 
-[node name="SpeedLabel" type="Label" parent="MainVBox/HBoxContainer/VBoxContainer" unique_id=2115435480]
+[node name="LabelContainer" type="MarginContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col3" unique_id=345025195]
 layout_mode = 2
-text = "Step Speed"
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_bottom = 6
 
-[node name="SpeedSlider" type="HSlider" parent="MainVBox/HBoxContainer/VBoxContainer" unique_id=1531518229]
+[node name="Label" type="Label" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col3/LabelContainer" unique_id=835865829]
 layout_mode = 2
-min_value = 0.2
-max_value = 1.4
-step = 0.1
-value = 0.7
+size_flags_horizontal = 4
+size_flags_vertical = 0
 
-[node name="AssemblerBox" type="VBoxContainer" parent="MainVBox/HBoxContainer" unique_id=707518753]
-custom_minimum_size = Vector2(240, 0)
+[node name="CUContainer" type="PanelContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col3" unique_id=435758870]
 layout_mode = 2
-theme_override_constants/separation = 8
 
-[node name="CodeLabel" type="Label" parent="MainVBox/HBoxContainer/AssemblerBox" unique_id=1076798418]
+[node name="Label" type="Label" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col3/CUContainer" unique_id=336982031]
 layout_mode = 2
-text = "Instruction Input"
+text = "CU"
 
-[node name="CodeEdit" type="TextEdit" parent="MainVBox/HBoxContainer/AssemblerBox" unique_id=188912330]
-custom_minimum_size = Vector2(240, 180)
+[node name="ALUContainer" type="PanelContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col3" unique_id=1140362146]
 layout_mode = 2
-text = "LOAD R1, 04
-LOAD R2, 06
-ADD R3, R1, R2
-STORE R3, 20
-HALT"
 
-[node name="LoadButton" type="Button" parent="MainVBox/HBoxContainer/AssemblerBox" unique_id=1264800788]
-custom_minimum_size = Vector2(0, 32)
+[node name="Label" type="Label" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col3/ALUContainer" unique_id=1518188612]
 layout_mode = 2
-text = "Load to Memory"
+text = "ALU"
 
-[node name="ExampleButton" type="Button" parent="MainVBox/HBoxContainer/AssemblerBox" unique_id=412523019]
-custom_minimum_size = Vector2(0, 32)
+[node name="FPUContainer" type="PanelContainer" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col3" unique_id=1366381792]
 layout_mode = 2
-text = "Load Example"
 
-[node name="StepTimer" type="Timer" parent="." unique_id=1853062266]
-wait_time = 0.8
+[node name="Label" type="Label" parent="MachineControl/Machine/CPUContainer/HBoxContainer/Col3/FPUContainer" unique_id=1554142941]
+layout_mode = 2
+text = "FPU"
+
+[node name="Scroll" type="Control" parent="MachineControl" unique_id=831876755]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -141.45001
+offset_bottom = -141.45001
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("8_v4tv4")
+
+[node name="Label" type="Label" parent="MachineControl/Scroll" unique_id=1903275620]
+layout_mode = 1
+offset_right = 96.0
+offset_bottom = 16.0
+text = "VOLEdu"
+
+[node name="InstructionsControl" type="Control" parent="." unique_id=2068162007]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="InstructionsControl" unique_id=1784910477]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="InstructionsControl/ColorRect" unique_id=1361787774]
+layout_mode = 0
+offset_top = 312.0
+offset_right = 461.0
+offset_bottom = 335.0
+text = "INSTRUCTIONS"
