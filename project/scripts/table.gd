@@ -21,18 +21,10 @@ func _set_dimensions():
 	width = 16
 
 func _create_table():
-	cells.clear()
 	# sets height and width of grids
 	body.columns = width
 	columns.columns = width + 1
 	
-	# small spacing between cells so the grid looks cleaner
-	body.add_theme_constant_override("h_separation", 2)
-	body.add_theme_constant_override("v_separation", 2)
-	columns.add_theme_constant_override("h_separation", 2)
-	rows.add_theme_constant_override("v_separation", 2)
-	
-	_add_line_edit(columns, " ") # corner gap
 	for col in range(width):
 		_add_line_edit(columns, _gen_coltxt(col)) # column header
 		
@@ -44,12 +36,13 @@ func _create_table():
 			var address = row * width + col
 			var cell = _add_line_edit(body, "")
 			cell.value_changed.connect(_on_cell_value_changed.bind(address))
+			cell.gui_input.connect(_on_cell_gui_input.bind(address))
 			cells.append(cell)
 
-func _gen_coltxt(i):
+func _gen_coltxt(_i):
 	return " "
 
-func _gen_rowtxt(i):
+func _gen_rowtxt(_i):
 	return " "
 
 func _get_hex(n):
@@ -61,7 +54,12 @@ func _add_line_edit(grid, text := ""): # adds cell to grid
 	grid.add_child(line_instance)
 	return line_instance
 
-func _on_cell_value_changed(value: String, address: int) -> void:
+func _on_cell_gui_input(event: InputEvent, address: int) -> void: # focus back on backspace + empty cell
+	if event is InputEventKey and event.pressed and not event.echo:
+		if Input.is_action_pressed("backspace") and cells[address].text == "":
+			cells[len(cells)-1 if !(address >= 0) else address-1].grab_focus()
+
+func _on_cell_value_changed(_value: String, address: int) -> void: # focus forward on enter/full cell
 	cells[address+1 if !(address >= len(cells)-1) else 0].grab_focus() # jumps to next cell
 
 func get_values() -> PackedStringArray:
@@ -77,6 +75,13 @@ func print_cells():
 		array.append(i.text if i.text != "" else i.placeholder_text)
 	print(array)
 
+func set_value(index, value):
+	cells[index].text = value
+
 func set_values(values: PackedStringArray) -> void:
 	for i in range(cells.size()):
 		cells[i].text = values[i] if values[i] != "00" else ""
+
+func clear():
+	for i in range(cells.size()):
+		cells[i].text = ""

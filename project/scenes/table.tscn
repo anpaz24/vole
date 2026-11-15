@@ -10,6 +10,7 @@ script = ExtResource("1_igyro")
 
 [node name="ColumnGrid" type="GridContainer" parent="." unique_id=1787947058]
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 17

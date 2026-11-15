@@ -14,6 +14,8 @@ private:
 	MainMemory main_memory;
 	CPU cpu;
 	bool halted = true;
+	float step_delay = 0.0f; // seconds
+	double step_elapsed = 0.0;
 
 protected:
 	static void _bind_methods();
@@ -22,10 +24,12 @@ public:
 	Vole() = default;
 	~Vole() override = default;
 
-	void set_halted(bool value);
+	void _process(double delta) override;
 	void step();
 	void run();
 	// connect to ui
+	void set_halted(bool value) { halted = value; };
+	void set_step_delay(float value) { step_delay = value; }
 	Dictionary get_state() const;
 	void set_state(const Dictionary &state);
 	// testing

@@ -55,10 +55,3 @@ web.wasm32.single.debug = "./web/libVOLE.web.template_debug.wasm32.nothreads.was
 web.wasm32.double.debug = "./web/libVOLE.web.template_debug.wasm32.double.nothreads.wasm"
 web.wasm32.single.release = "./web/libVOLE.web.template_release.wasm32.nothreads.wasm"
 web.wasm32.double.release = "./web/libVOLE.web.template_release.wasm32.double.nothreads.wasm"
-
-windows.x86_64.single.debug = "./windows/libVOLE.windows.template_debug.x86_64.dll"
-windows.x86_64.double.debug = "./windows/libVOLE.windows.template_debug.x86_64.double.dll"
-windows.x86_64.single.release = "./windows/libVOLE.windows.template_release.x86_64.dll"
-windows.x86_64.double.release = "./windows/libVOLE.windows.template_release.x86_64.double.dll"
-windows.editor.x86_64 = "res://bin/windows/libVOLE.windows.template_debug.x86_64.dll"
-windows.debug.x86_64 = "res://bin/windows/libVOLE.windows.template_debug.x86_64.dll"

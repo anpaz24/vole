@@ -6,6 +6,7 @@
 void Vole::_bind_methods() {
 	godot::ClassDB::bind_method(D_METHOD("print_test"), &Vole::print_test);
 	godot::ClassDB::bind_method(D_METHOD("set_halted"), &Vole::set_halted);
+	godot::ClassDB::bind_method(D_METHOD("set_step_delay", "value"), &Vole::set_step_delay);
 	godot::ClassDB::bind_method(D_METHOD("step"), &Vole::step);
 	godot::ClassDB::bind_method(D_METHOD("run"), &Vole::run);
 	godot::ClassDB::bind_method(D_METHOD("get_state"), &Vole::get_state);
@@ -14,15 +15,14 @@ void Vole::_bind_methods() {
 		"state_changed",
 		godot::PropertyInfo(godot::Variant::DICTIONARY, "state")
 	));
+	ADD_SIGNAL(godot::MethodInfo(
+		"halted",
+		godot::PropertyInfo(godot::Variant::BOOL, "halted")
+	));
 }
 
 void Vole::print_test() { 
 	print_line("I am Vole :)"); // check if node is working
-}
-
-//
-void Vole::set_halted(bool value) { // continue or pause
-	halted = value;
 }
 
 void Vole::step() {
@@ -31,10 +31,23 @@ void Vole::step() {
 }
 
 void Vole::run() {
-	set_halted(false);
-	while (!halted) { // until halt or error
-		step();
+	halted = false;
+	step_elapsed = 0.0;
+	set_process(true);
+}
+
+void Vole::_process(double delta) {
+	if (halted) {
+		set_process(false);
+		emit_signal("halted", true);
+		return;
 	}
+	step_elapsed += delta;
+	if (step_delay > 0.0f && step_elapsed < step_delay) {
+		return;
+	}
+	step_elapsed = 0.0;
+	step();
 }
 
 // connect to ui
