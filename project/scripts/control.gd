@@ -3,8 +3,8 @@ extends Control
 @onready var content_nodes = [$Machine] # The node to scale
 
 func _ready() -> void:
-	custom_minimum_size.x = get_parent().size.x * 0.6575
-	custom_maximum_size.x = get_parent().size.x * 0.9575
+	custom_minimum_size.x = get_parent().size.x * 0.67
+	custom_maximum_size.x = get_parent().size.x * 0.967
 	resized.connect(_on_resized)
 	_on_resized() # Set initial scale and pivot on load
 

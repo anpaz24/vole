@@ -1,14 +1,14 @@
 extends HBoxContainer
 
 @onready var vole = $"Vole"
-@onready var main_mem = $MemoryContainer/TabContainer/MainMemory
-@onready var gen_regs = $CPUContainer/HBoxContainer/Col1/GeneralRegisters
-@onready var sys_regs = $CPUContainer/HBoxContainer/Col2/SysRegsContainer/SystemRegisters
-@onready var step_button = $CPUContainer/HBoxContainer/Col2/ButtonsContainer/StepButton
-@onready var run_button = $CPUContainer/HBoxContainer/Col2/ButtonsContainer/RunButton
-@onready var clear_button = $CPUContainer/HBoxContainer/Col2/ButtonsContainer/ClearButton
-@onready var step_slider = $CPUContainer/HBoxContainer/Col2/ButtonsContainer/StepSliderContainer/HBoxContainer/HSlider
-@onready var zero_button = $CPUContainer/HBoxContainer/Col2/SysRegsContainer/ZeroButton
+@onready var main_mem = %MainMemory
+@onready var gen_regs = %GeneralRegisters
+@onready var sys_regs = %SystemRegisters
+@onready var step_button = %StepButton
+@onready var run_button = %RunButton
+@onready var clear_button = %ClearButton
+@onready var step_slider = %StepSlider
+@onready var zero_button = %ZeroButton
 
 func _ready() -> void:
 	vole.print_test()

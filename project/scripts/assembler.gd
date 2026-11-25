@@ -5,7 +5,7 @@ extends VBoxContainer
 @onready var load_button = $AssembleButton
 @onready var example_button = $ExampleButton
 
-@onready var main_memory = $"../MainMemory"
+@onready var main_memory = %MainMemory
 
 #var label = ""
 var instruction = ""

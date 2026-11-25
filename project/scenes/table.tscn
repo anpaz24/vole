@@ -2,31 +2,47 @@
 
 [ext_resource type="Script" uid="uid://bqq0mi2utsrdu" path="res://scripts/table.gd" id="1_igyro"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eotx8"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.012920001, 0.012920001, 0.012920001, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_02ppr"]
+bg_color = Color(0.012920001, 0.012920001, 0.012920001, 0.3)
+
+[sub_resource type="Theme" id="Theme_02ppr"]
+LineEdit/colors/font_uneditable_color = Color(1, 1, 1, 1)
+LineEdit/styles/normal = SubResource("StyleBoxFlat_eotx8")
+LineEdit/styles/read_only = SubResource("StyleBoxFlat_02ppr")
+
 [node name="Table" type="VBoxContainer" unique_id=117153601]
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/separation = 0
+theme = SubResource("Theme_02ppr")
+theme_override_constants/separation = 2
 script = ExtResource("1_igyro")
 
 [node name="ColumnGrid" type="GridContainer" parent="." unique_id=1787947058]
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
 columns = 17
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1946372551]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="RowGrid" type="GridContainer" parent="HBoxContainer" unique_id=782380771]
 layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
 
 [node name="BodyGrid" type="GridContainer" parent="HBoxContainer" unique_id=1945755761]
 layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
 columns = 16
