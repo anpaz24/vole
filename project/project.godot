@@ -15,7 +15,7 @@ run/main_scene="uid://polaxjpy6sbw"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 boot_splash/stretch_mode=0
 boot_splash/image="uid://b3qle7wnvvgtx"
-config/icon="res://icon.svg"
+config/icon="uid://cdurenb7n33f"
 boot_splash/minimum_display_time=1000
 
 [autoload]

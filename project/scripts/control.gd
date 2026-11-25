@@ -3,12 +3,13 @@ extends Control
 @onready var content_nodes = [$Machine] # The node to scale
 
 func _ready() -> void:
-	custom_minimum_size.x = get_parent().size.x * 0.67
-	custom_maximum_size.x = get_parent().size.x * 0.967
 	resized.connect(_on_resized)
 	_on_resized() # Set initial scale and pivot on load
 
 func _on_resized() -> void:
+	custom_minimum_size.x = get_parent().size.x - 390 # instruction sidebar size
+	custom_maximum_size.x = get_parent().size.x - 39 # instruction label size
+	
 	# Get the maximum available width from the parent container
 	var max_width = get_parent().size.x if get_parent() is Control else get_viewport_rect().size.x
 	
